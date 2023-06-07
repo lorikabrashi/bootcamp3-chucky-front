@@ -1,6 +1,7 @@
 import withLayouts from '../../HOC/withLayouts'
 import {Row, Col} from 'react-bootstrap'
 import LoginForm from '../../components/Forms/LoginForm'
+import { NavLink } from 'react-router-dom'
 const Login = () => {
 
   const onLoginSuccess = (results) => {
@@ -15,6 +16,7 @@ const Login = () => {
     </Col>
     <Col md={6}>
       <LoginForm onSuccess={onLoginSuccess} />
+      <NavLink to="/forgot-password">Forgot Password</NavLink>
     </Col>
   </Row>
   )

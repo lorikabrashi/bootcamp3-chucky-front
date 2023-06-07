@@ -1,12 +1,12 @@
-import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { ENDPOINTS, apiCall } from '../../lib/Api'
-import ErrorAlert from '../../components/Alerts/ErrorAlert'
+import { useState } from 'react'
+import ErrorAlert from '../Alerts/ErrorAlert'
+import { EMAIL_REGEX } from '../../lib/constants'
 
-function LoginForm({ onSuccess }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function ForgotPasswordForm({onSuccess}) {
   const [errorMessages, setErrorMessages] = useState([])
+  const [email, setEmail] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -14,22 +14,24 @@ function LoginForm({ onSuccess }) {
     if (!email) {
       errors.push('Email cannot be empty!')
     }
-    if (!password) {
-      errors.push('Password cannot be empty!')
+    if (!EMAIL_REGEX.test(email)) {
+      errors.push('Email is not valid!')
     }
     if (errors.length) {
       setErrorMessages(errors)
       return
     }
+
     const data = {
-      email,
-      password,
+      email
     }
-    const response = await apiCall(ENDPOINTS.login, { data })
-    if (response.confirm) {
-      onSuccess(response.results)
-    } else {
-      setErrorMessages(['Something Went wrong!'])
+    const response = await apiCall(ENDPOINTS.forgotPasswordRequest, { data })
+    console.log(response)
+    if(response.confirm){
+      onSuccess()
+    }
+    else{
+      setErrorMessages(['Something went wrong!'])
     }
   }
 
@@ -48,18 +50,6 @@ function LoginForm({ onSuccess }) {
             placeholder="Enter email"
           />
         </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value)
-            }}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
         <Button variant="primary" type="submit">
           Submit
         </Button>
@@ -68,4 +58,4 @@ function LoginForm({ onSuccess }) {
   )
 }
 
-export default LoginForm
+export default ForgotPasswordForm

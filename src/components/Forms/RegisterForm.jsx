@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../lib/constants'
 import { ENDPOINTS, apiCall } from '../../lib/Api'
+import ErrorAlert from '../../components/Alerts/ErrorAlert'
 
 function RegisterForm({ setRegistered }) {
   const [firstName, setFirstName] = useState('')
@@ -58,14 +59,7 @@ function RegisterForm({ setRegistered }) {
 
   return (
     <>
-      {errorMessages.length > 0 && (
-        <Alert variant="danger">
-          {errorMessages.map((elem, index) => (
-            <p key={index}>{elem}</p>
-          ))}
-        </Alert>
-      )}
-
+      <ErrorAlert messages={errorMessages} />
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>First Name</Form.Label>

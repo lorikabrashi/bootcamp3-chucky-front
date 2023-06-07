@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
-import { publicRoutes } from './routesData'
+import { privateRoutes } from './routesData'
 
 const PublicRoutes = () => {
-  // check if i have token 
+  // check if i don't have token 
   // if true
-    // redirect to dashboard
+    // redirect to home
      
   return (
     <Routes>
-      {publicRoutes.map((elem, index) => {
+      {privateRoutes.map((elem, index) => {
         return <Route key={index} element={elem.element} path={elem.path} />
       })}
     </Routes>

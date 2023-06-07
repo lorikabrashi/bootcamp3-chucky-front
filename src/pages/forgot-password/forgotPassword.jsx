@@ -1,5 +1,20 @@
-import withLayouts from "../../HOC/withLayouts"
+import { Row, Col } from 'react-bootstrap'
+import withLayouts from '../../HOC/withLayouts'
+import ForgotPasswordForm from '../../components/Forms/ForgotPasswordForm'
+import { useState } from 'react'
 function ForgotPassword() {
-  return <div>forgotPassword</div>
+  const [requestSend, setRequestSend] = useState(false)
+
+  const handleSuccess = () => {
+    setRequestSend(true)
+  }
+  return (
+    <Row>
+      <Col md={12}>
+        <h1>Forgot Password</h1>
+      </Col>
+      <Col md={6}>{requestSend ? <h2>An email was sent to you with further instructions!</h2> : <ForgotPasswordForm onSuccess={handleSuccess} />}</Col>
+    </Row>
+  )
 }
 export default withLayouts(ForgotPassword)
