@@ -1,27 +1,12 @@
 import withLayouts from '../../HOC/withLayouts'
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment, incrementByAmount } from '../../store/slices/counterSlice'
+import { useSelector } from 'react-redux'
+
 
 function Home() {
-  const count = useSelector((state) => state.counter.value)
+  const auth = useSelector((state) => state.auth.value)
 
-
-  const dispatch = useDispatch()
   return (
-    <div>
-      <button aria-label="Increment value" onClick={() => dispatch(increment())}>
-        Increment
-      </button>
-      <span>{count}</span>
-      <button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
-        Decrement
-      </button>
-
-
-      <button aria-label="Change by amount" onClick={() => dispatch(incrementByAmount(-5))}>
-        Change by amount
-      </button>
-    </div>
+   <div>{JSON.stringify(auth)}</div>
   )
 }
 

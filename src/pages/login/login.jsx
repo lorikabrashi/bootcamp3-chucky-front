@@ -2,11 +2,14 @@ import withLayouts from '../../HOC/withLayouts'
 import {Row, Col} from 'react-bootstrap'
 import LoginForm from '../../components/Forms/LoginForm'
 import { NavLink } from 'react-router-dom'
-const Login = () => {
+import { useDispatch } from 'react-redux'
+import {login} from '../../store/slices/authSlice'
 
+const Login = () => {
+  const dispatch = useDispatch()
   const onLoginSuccess = (results) => {
-    console.log(results)
-    alert('logged in')
+    dispatch(login(results))
+    
   }
 
   return (

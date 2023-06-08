@@ -1,18 +1,18 @@
-import { Route, Routes } from 'react-router-dom'
-import { publicRoutes } from './routesData'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-const PublicRoutes = () => {
-  // check if i have token 
-  // if true
-    // redirect to dashboard
-     
-  return (
-    <Routes>
-      {publicRoutes.map((elem, index) => {
-        return <Route key={index} element={elem.element} path={elem.path} />
-      })}
-    </Routes>
-  )
+const PublicRoutes = ({ children }) => {
+  const auth = useSelector((state) => state.auth.value)
+  const navigate = useNavigate()
+  useEffect(() => {
+    console.log(auth)
+    if (auth && auth.token) {
+      navigate('/dashboard')
+    }
+  }, [auth, navigate])
+
+  return auth && auth.token ? null :  children
 }
 
 export default PublicRoutes

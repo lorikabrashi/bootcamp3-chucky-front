@@ -1,18 +1,17 @@
-import { Route, Routes } from 'react-router-dom'
-import { privateRoutes } from './routesData'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-const PublicRoutes = () => {
-  // check if i don't have token 
-  // if true
-    // redirect to home
-     
-  return (
-    <Routes>
-      {privateRoutes.map((elem, index) => {
-        return <Route key={index} element={elem.element} path={elem.path} />
-      })}
-    </Routes>
-  )
+const PrivateRoutes = ({ children }) => {
+  const auth = useSelector((state) => state.auth.value)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!auth) {
+      navigate('/login')
+    }
+  }, [auth, navigate])
+
+  return !auth ? null : children
 }
 
-export default PublicRoutes
+export default PrivateRoutes

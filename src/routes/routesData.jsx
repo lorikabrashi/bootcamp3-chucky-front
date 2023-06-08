@@ -4,12 +4,9 @@ import ForgotPassword from '../pages/forgot-password'
 import Home from '../pages/home'
 import VerifyAccount from '../pages/verifyAccount'
 import ResetPassword from '../pages/reset-password'
+import Dashboard from '../pages/dashboard'
 
 export const publicRoutes = [
-  {
-    path: '/',
-    element: <Home />,
-  },
   {
     path: '/login',
     element: <Login />,
@@ -35,6 +32,13 @@ export const publicRoutes = [
 export const privateRoutes = [
   {
     path: '/dashboard',
-    element: <h1>Dashboard</h1>,
+    element: <Dashboard />,
+  },
+]
+
+export const exposedRoutes = [
+  {
+    path: '/',
+    element: <Home />,
   },
 ]

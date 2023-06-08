@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './slices/counterSlice'
+import authSlice from './slices/authSlice'
+import thunk from 'redux-thunk'
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
+    auth: authSlice
    },
+   middleware: [thunk]
 })
